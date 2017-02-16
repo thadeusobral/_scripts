@@ -1,0 +1,79 @@
+###Rodar esta parte somente uma vez ###
+install.packages("dismo")
+install.packages("raster")
+install.packages("maptools")
+install.packages("rgdal")
+
+###Depois que instalar os pacotes uma primeira vez, rodar a partir daqui###
+library("dismo")
+library("raster")
+library("maptools")
+library("rgdal")
+
+###Definindo o diretÃ³rio padrÃ£o de trabalho, onde estÃ£o as variÃ¡veis###
+###coloque o caminho da pasta onde estÃ£o as variÃ¡veis entre as aspas
+setwd("C:/Users/Thadeu Sobral Souza/Documents/DOUTORADO/Datas distribution/21k_2.5/ascii/wc_2_5m_MIROC3.2_21k_")
+
+###Especifique as variÃ¡veis presentes na pasta. ComeÃ§a da bio1 e vai atÃ© o bioN, onde N Ã© o valor do nÃºmero total de variÃ¡veis na pasta
+bio01<-raster("bio_1.asc")
+bio02<-raster("bio_2.asc")
+bio03<-raster("bio_3.asc")
+bio04<-raster("bi0_4.asc")
+bio05<-raster("bio_5.asc")
+bio06<-raster("bio_6.asc")
+bio07<-raster("bio_7.asc")
+bio08<-raster("bio_8.asc")
+bio09<-raster("bi0_9.asc")
+bio10<-raster("bio_10.asc")
+bio11<-raster("bio_11.asc")
+bio12<-raster("bio_12.asc")
+bio13<-raster("bio_13.asc")
+bio14<-raster("bio_14.asc")
+bio15<-raster("bio_15.asc")
+bio16<-raster("bi0_16.asc")
+bio17<-raster("bio_17.asc")
+bio18<-raster("bio_18.asc")
+bio19<-raster("bio_19.asc")
+variables<- stack(bio01, bio02, bio03, bio04, bio05, bio06, bio07, bio08, bio09, bio10, bio11, bio12, bio13, bio14, bio15, bio16, bio17, bio18, bio19) # aqui terÃ¡ que ir de 01 atÃ© 19 ou atÃ© o nÃºemro de variÃ¡veis que for usar na modelagem
+
+###Definindo a extensao. deixe espaco depois das virgulas
+### Xmin = limite da extencao mais a oeste
+### Ymin = limite da extencao mais ao sul
+### Xmax = limite da extencao mais a leste
+### aqui pode ter que inverter os malores de Xmax e Ymin (tem que fazer uma vez e fazer o teste se funcionou), em graus.
+##Xmin = -80
+> Ymin = -56
+> Ymax= 0
+> Xmax = -34
+
+extencao<- extent(Xmin, Xmax, Ymin, Ymax)  ## nÃ£o ponha toda a extenÃ§Ã£o da AS, pois com cels de 4km de lado vai ser dificil fazer o PCA do jeito que estou imaginando. defina uma Ã¡rea de trabalho, 
+					   ##levando-se em consideraÃ§Ã£o os pontos de ocorrÃªncia e corte o que nÃ£o for importante da extencao. Talvez, faca uma modelagem com todas as ocorrencias, sÃ³ para ver ate onde os modelos podem prever e daÃ­ corte um pouco mais acima 					   ##disso.
+
+
+extencaofinal<- crop(variables, extencao)
+plot (extencaofinal)			      #faca o teste, mais aqui pode ser que de pra plotar qual sera a extecao no R jÃ¡
+bio01_cortada<- crop(bio01, extencao)
+bio02_cortada<- crop(bio02, extencao)
+bio03_cortada<- crop(bio03, extencao)
+bio04_cortada<- crop(bio04, extencao)
+bio05_cortada<- crop(bio05, extencao)
+bio06_cortada<- crop(bio06, extencao)
+bio07_cortada<- crop(bio07, extencao)
+bio08_cortada<- crop(bio08, extencao)
+bio09_cortada<- crop(bio09, extencao)
+bio10_cortada<- crop(bio10, extencao)
+bio11_cortada<- crop(bio11, extencao)
+bio12_cortada<- crop(bio12, extencao)
+bio13_cortada<- crop(bio13, extencao)
+bio14_cortada<- crop(bio14, extencao)
+bio15_cortada<- crop(bio15, extencao)
+bio16_cortada<- crop(bio16, extencao)
+bio17_cortada<- crop(bio17, extencao)
+bio18_cortada<- crop(bio18, extencao)
+bio19_cortada<- crop(bio19, extencao)
+
+###Salvando os rasters com a extencao devida
+writeRaster (bio01_cortada, "bio_1_elen.asc") #aqui tem que fazer o teste de como, mas tem como fazer tudo automatizado. NÃ£o sei se 					      #vem bio01_cortada, bio02_cortada bioNN_cortada, "nomes respectivos" ou se vem 
+					      #boi01_cortada, "nome especifico para bio01_cortada", bio02_cortada, "nome 					    		      #especifico" etc
+
+ ##Extens�o AS -81, -33, -59, 13##

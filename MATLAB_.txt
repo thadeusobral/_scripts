@@ -1,0 +1,10 @@
+CONVERTER .ASC EM .MAT PARA FAZER ANÁLISE DE PCA
+
+
+caminho aqui no matlab
+File > Set Path > clica em Add folder with subfolders > seleciona a pasta do matlab> clica em save
+depois  digita "modelo_comp" no matlab, na parte de comando. na primeira caixinha procura a pasta que tem os asc cortados das variaveis
+daí no lado direito do programa vera que tem tipo menuzinho
+seleciona converter asc pra mat e clica ok.
+
+"conv_asc_col('caminho da pasta onde estão as variáveis\','.mat','nomedeumavariavel.mat')"
